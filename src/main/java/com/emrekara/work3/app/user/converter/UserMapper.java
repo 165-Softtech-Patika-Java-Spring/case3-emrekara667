@@ -2,6 +2,7 @@ package com.emrekara.work3.app.user.converter;
 
 import com.emrekara.work3.app.user.dto.UserDto;
 import com.emrekara.work3.app.user.dto.UserSaveRequestDto;
+import com.emrekara.work3.app.user.dto.UserUpdateRequestDto;
 import com.emrekara.work3.app.user.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -19,4 +20,6 @@ public interface UserMapper {
     User convertToUser(UserSaveRequestDto userSaveRequestDto);
 
     UserDto convertToUserDto(User user);
+
+    User convertToUser(UserUpdateRequestDto userUpdateRequestDto);
 }

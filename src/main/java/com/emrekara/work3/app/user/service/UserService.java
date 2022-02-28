@@ -1,8 +1,12 @@
 package com.emrekara.work3.app.user.service;
 
+import com.emrekara.work3.app.gen.enums.GenErrorMessage;
+import com.emrekara.work3.app.gen.exceptions.ItemNotFoundException;
 import com.emrekara.work3.app.user.converter.UserMapper;
+import com.emrekara.work3.app.user.dto.UserDeleteDto;
 import com.emrekara.work3.app.user.dto.UserDto;
 import com.emrekara.work3.app.user.dto.UserSaveRequestDto;
+import com.emrekara.work3.app.user.dto.UserUpdateRequestDto;
 import com.emrekara.work3.app.user.entity.User;
 import com.emrekara.work3.app.user.service.entityservice.UserEntityService;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +39,43 @@ public class UserService {
         UserDto userDto = UserMapper.INSTANCE.convertToUserDto(user);
 
         return userDto;
+    }
+
+    public UserDto findById(Long id) {
+
+        User user = userEntityService.getByIdWithControl(id);
+
+        UserDto userDto = UserMapper.INSTANCE.convertToUserDto(user);
+
+        return userDto;
+    }
+
+    public UserDto findByName(String name) {
+        User user = userEntityService.getByName(name);
+
+        UserDto userDto = UserMapper.INSTANCE.convertToUserDto(user);
+
+        return userDto;
+    }
+
+    public UserDto update(UserUpdateRequestDto userUpdateRequestDto) {
+        controlIsCustomerExist(userUpdateRequestDto);
+
+        User user;
+        user = UserMapper.INSTANCE.convertToUser(userUpdateRequestDto);
+
+        userEntityService.save(user);
+
+        UserDto userDto = UserMapper.INSTANCE.convertToUserDto(user);
+
+        return userDto;
+    }
+
+    private void controlIsCustomerExist(UserUpdateRequestDto userUpdateRequestDto){
+        Long id = userUpdateRequestDto.getId();
+        boolean isExist = userEntityService.existsById(id);
+        if(!isExist){
+            throw new ItemNotFoundException(GenErrorMessage.ITEM_NOT_FOUND);
+        }
     }
 }
