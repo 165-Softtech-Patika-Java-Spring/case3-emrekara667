@@ -8,6 +8,7 @@ import com.emrekara.work3.app.product.service.entityservice.ProductEntityService
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -47,5 +48,14 @@ public class ProductService {
         Product product = productEntityService.getByIdWithControl(id);
 
         productEntityService.delete(product);
+    }
+
+    public ProductDto updateProductPrice(Long id, BigDecimal price) {
+
+        Product product =  productEntityService.updateProductPrice(id,price);
+
+        ProductDto productDto = ProductMapper.INSTANCE.convertToProductDto(product);
+
+        return productDto;
     }
 }
