@@ -5,6 +5,7 @@ import com.emrekara.work3.app.gen.exceptions.ItemNotFoundException;
 import com.emrekara.work3.app.gen.service.BaseEntityService;
 import com.emrekara.work3.app.user.dao.UserDao;
 import com.emrekara.work3.app.user.entity.User;
+import com.emrekara.work3.app.user.exception.UserNotMatchException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -30,7 +31,8 @@ public class UserEntityService extends BaseEntityService<User, UserDao> {
         if(userOptional.isPresent()){
             user = userOptional.get();
         }else{
-            throw new ItemNotFoundException(GenErrorMessage.ITEM_NOT_FOUND);
+           // throw new ItemNotFoundException(GenErrorMessage.ITEM_NOT_FOUND);
+            throw new UserNotMatchException(user.getName(),user.getTelephoneNumber());
         }
         return user;
     }

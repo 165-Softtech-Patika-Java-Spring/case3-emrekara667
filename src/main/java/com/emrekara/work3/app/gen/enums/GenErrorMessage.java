@@ -20,4 +20,5 @@ public enum GenErrorMessage implements BaseErrorMessage{
     public String toString() {
         return message;
     }
+
 }

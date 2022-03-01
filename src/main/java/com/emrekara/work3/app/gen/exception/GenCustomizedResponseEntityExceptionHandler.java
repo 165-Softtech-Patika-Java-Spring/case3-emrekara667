@@ -2,6 +2,7 @@ package com.emrekara.work3.app.gen.exception;
 
 import com.emrekara.work3.app.gen.exceptions.GenBusinessException;
 import com.emrekara.work3.app.gen.exceptions.ItemNotFoundException;
+import com.emrekara.work3.app.user.exception.UserNotMatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,5 +68,20 @@ public class GenCustomizedResponseEntityExceptionHandler extends ResponseEntityE
 
         return new ResponseEntity<>(genExceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAllUserNotMatchException(UserNotMatchException ex, WebRequest webRequest){
+
+        Date errorDate = new Date();
+        String message = ex.getMessage();
+        String description = webRequest.getDescription(false);
+
+        GenExceptionResponse genExceptionResponse = new GenExceptionResponse(errorDate, message, description);
+        genExceptionResponse.setMessage(message);
+
+        return new ResponseEntity<>(genExceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+
 
 }

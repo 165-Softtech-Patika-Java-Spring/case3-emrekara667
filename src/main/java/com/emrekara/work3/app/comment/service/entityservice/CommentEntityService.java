@@ -5,6 +5,7 @@ import com.emrekara.work3.app.comment.entity.Comment;
 import com.emrekara.work3.app.gen.enums.GenErrorMessage;
 import com.emrekara.work3.app.gen.exceptions.ItemNotFoundException;
 import com.emrekara.work3.app.gen.service.BaseEntityService;
+import com.emrekara.work3.app.user.exception.UserNotMatchException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,7 +45,8 @@ public class CommentEntityService extends BaseEntityService<Comment, CommentDao>
         if(!optionalCommentList.get().isEmpty()){
             commentList = optionalCommentList.get();
         }else{
-            throw new ItemNotFoundException(GenErrorMessage.ITEM_NOT_FOUND);
+           throw new ItemNotFoundException(GenErrorMessage.ITEM_NOT_FOUND);
+
         }
         return commentList;
     }
