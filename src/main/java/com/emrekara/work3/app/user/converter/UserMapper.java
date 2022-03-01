@@ -1,5 +1,6 @@
 package com.emrekara.work3.app.user.converter;
 
+import com.emrekara.work3.app.user.dto.UserDeleteDto;
 import com.emrekara.work3.app.user.dto.UserDto;
 import com.emrekara.work3.app.user.dto.UserSaveRequestDto;
 import com.emrekara.work3.app.user.dto.UserUpdateRequestDto;
@@ -22,4 +23,6 @@ public interface UserMapper {
     UserDto convertToUserDto(User user);
 
     User convertToUser(UserUpdateRequestDto userUpdateRequestDto);
+
+    User covertToUser(UserDeleteDto userDeleteDto);
 }

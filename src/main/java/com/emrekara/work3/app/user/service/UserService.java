@@ -78,4 +78,12 @@ public class UserService {
             throw new ItemNotFoundException(GenErrorMessage.ITEM_NOT_FOUND);
         }
     }
+
+    public void delete(UserDeleteDto userDeleteDto) {
+        User user = UserMapper.INSTANCE.covertToUser(userDeleteDto);
+
+        user = userEntityService.getByNameAndPhoneWithControl(user);
+
+        userEntityService.delete(user);
+    }
 }

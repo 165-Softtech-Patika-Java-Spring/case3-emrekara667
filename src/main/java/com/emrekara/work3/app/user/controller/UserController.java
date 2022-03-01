@@ -56,6 +56,13 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
 
+    @DeleteMapping()
+    public ResponseEntity delete(@RequestBody UserDeleteDto userDeleteDto){
+        userService.delete(userDeleteDto);
+
+        return ResponseEntity.ok(Void.TYPE);
+    }
+
 
 
 
