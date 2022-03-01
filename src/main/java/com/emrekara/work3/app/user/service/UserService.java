@@ -80,6 +80,7 @@ public class UserService {
     }
 
     public void delete(UserDeleteDto userDeleteDto) {
+
         User user = UserMapper.INSTANCE.covertToUser(userDeleteDto);
 
         user = userEntityService.getByNameAndPhoneWithControl(user);

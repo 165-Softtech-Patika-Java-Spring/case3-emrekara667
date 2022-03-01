@@ -5,7 +5,6 @@ import com.emrekara.work3.app.comment.dto.CommentDto;
 import com.emrekara.work3.app.comment.dto.CommentSaveRequestDto;
 import com.emrekara.work3.app.comment.entity.Comment;
 import com.emrekara.work3.app.comment.service.entityservice.CommentEntityService;
-import com.emrekara.work3.app.user.service.entityservice.UserEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +32,7 @@ public class CommentService {
 
     public List<CommentDto> findCommentByUser(Long userId) {
 
-        List<Comment> commentList = commentEntityService.findCommentByUser(userId);
+        List<Comment> commentList = commentEntityService.findCommentByUserWithControl(userId);
 
         List<CommentDto> commentDtoList = CommentMapper.INSTANCE.convertToCommentDtoList(commentList);
 
