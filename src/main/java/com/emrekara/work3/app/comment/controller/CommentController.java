@@ -37,5 +37,12 @@ public class CommentController {
         return ResponseEntity.ok(commentDtoList);
     }
 
+    @GetMapping("/product/{productId}")
+    public ResponseEntity findCommentByProduct(@PathVariable Long productId){
+        List<CommentDto> commentDtoList = commentService.findCommentByProduct(productId);
+
+        return ResponseEntity.ok(commentDtoList);
+    }
+
 
 }

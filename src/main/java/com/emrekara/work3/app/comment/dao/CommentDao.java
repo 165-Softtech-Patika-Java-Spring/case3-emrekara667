@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface CommentDao extends JpaRepository<Comment, Long> {
 
     Optional<List<Comment>> findAllByUserId(Long userId);
+
+    Optional<List<Comment>> findAllByProductId(Long productId);
 }

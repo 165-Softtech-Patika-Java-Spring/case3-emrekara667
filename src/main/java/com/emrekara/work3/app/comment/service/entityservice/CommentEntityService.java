@@ -33,21 +33,20 @@ public class CommentEntityService extends BaseEntityService<Comment, CommentDao>
         return commentList;
     }
 
-
-    /*
-     public Optional<User> findByNameAndPhone(String name, String phone){
-        return getDao().findByNameAndTelephoneNumber(name, phone);
+    public Optional<List<Comment>> findCommentByProduct(Long productId){
+        return getDao().findAllByProductId(productId);
     }
 
-    public User getByNameAndPhoneWithControl(User user) {
-        Optional<User> userOptional = findByNameAndPhone(user.getName(), user.getTelephoneNumber());
+    public List<Comment> findCommentByProductWithControl(Long productId) {
+        Optional<List<Comment>> optionalCommentList = findCommentByProduct(productId);
 
-        if(userOptional.isPresent()){
-            user = userOptional.get();
+        List<Comment> commentList;
+        if(!optionalCommentList.get().isEmpty()){
+            commentList = optionalCommentList.get();
         }else{
             throw new ItemNotFoundException(GenErrorMessage.ITEM_NOT_FOUND);
         }
-        return user;
+        return commentList;
     }
-     */
+
 }

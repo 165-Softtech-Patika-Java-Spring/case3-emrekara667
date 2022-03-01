@@ -38,4 +38,13 @@ public class CommentService {
 
         return commentDtoList;
     }
+
+    public List<CommentDto> findCommentByProduct(Long productId) {
+
+        List<Comment> commentList = commentEntityService.findCommentByProductWithControl(productId);
+
+        List<CommentDto> commentDtoList = CommentMapper.INSTANCE.convertToCommentDtoList(commentList);
+
+        return commentDtoList;
+    }
 }
