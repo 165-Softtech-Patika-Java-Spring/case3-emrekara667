@@ -23,4 +23,9 @@ public class CommentService {
 
         return commentDto;
     }
+
+    public void delete(Long id) {
+        Comment comment = commentEntityService.getByIdWithControl(id);
+        commentEntityService.delete(comment);
+    }
 }
