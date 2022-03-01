@@ -36,4 +36,6 @@ public class UserEntityService extends BaseEntityService<User, UserDao> {
         }
         return user;
     }
+
+
 }

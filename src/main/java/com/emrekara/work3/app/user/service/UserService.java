@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +34,14 @@ public class UserService {
     public UserDto save(UserSaveRequestDto userSaveRequestDto) {
 
         User user = UserMapper.INSTANCE.convertToUser(userSaveRequestDto);
+
+        Optional<User> userOptional = userEntityService.getDao().findByEmailOrNameOrTelephoneNumber(user.getName(),
+                user.getEmail(),user.getTelephoneNumber());
+
+        if(userOptional.isPresent()){
+            throw new ItemNotFoundException(GenErrorMessage.FILE_ALREADY_EXIST);
+        }
+
 
         user = userEntityService.save(user);
 

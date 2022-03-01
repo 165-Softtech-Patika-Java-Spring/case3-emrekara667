@@ -3,6 +3,7 @@ package com.emrekara.work3.app.gen.enums;
 public enum GenErrorMessage implements BaseErrorMessage{
 
     ITEM_NOT_FOUND("Item not found!"),
+    FILE_ALREADY_EXIST("Phone or name or email already exist")
     ;
 
     private String message;
