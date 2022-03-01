@@ -5,6 +5,8 @@ import com.emrekara.work3.app.comment.dto.CommentDto;
 import com.emrekara.work3.app.comment.dto.CommentSaveRequestDto;
 import com.emrekara.work3.app.comment.entity.Comment;
 import com.emrekara.work3.app.comment.service.entityservice.CommentEntityService;
+import com.emrekara.work3.app.product.entity.Product;
+import com.emrekara.work3.app.product.service.entityservice.ProductEntityService;
 import com.emrekara.work3.app.user.entity.User;
 import com.emrekara.work3.app.user.service.entityservice.UserEntityService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.Optional;
 public class CommentService {
     private final CommentEntityService commentEntityService;
     private final UserEntityService userEntityService;
+    private final ProductEntityService productEntityService;
 
     public CommentDto save(CommentSaveRequestDto commentSaveRequestDto) {
         Comment comment = CommentMapper.INSTANCE.convertToComment(commentSaveRequestDto);
@@ -35,8 +38,9 @@ public class CommentService {
     }
 
     public List<CommentDto> findCommentByUser(Long userId) {
-        Optional<User>  userOptional = userEntityService.findById(userId);
-        String name = userOptional.get().getName();
+        User user = userEntityService.getByIdWithControl(userId);
+        String name = user.getName();
+
 
         List<Comment> commentList = commentEntityService.findCommentByUserWithControl(userId,name);
 
@@ -47,7 +51,11 @@ public class CommentService {
 
     public List<CommentDto> findCommentByProduct(Long productId) {
 
-        List<Comment> commentList = commentEntityService.findCommentByProductWithControl(productId);
+        Product product = productEntityService.getByIdWithControl(productId);
+
+        String productName = product.getName();
+
+        List<Comment> commentList = commentEntityService.findCommentByProductWithControl(productId,productName);
 
         List<CommentDto> commentDtoList = CommentMapper.INSTANCE.convertToCommentDtoList(commentList);
 

@@ -1,6 +1,7 @@
 package com.emrekara.work3.app.gen.exception;
 
-import com.emrekara.work3.app.comment.exception.CommentDoNotFoundException;
+import com.emrekara.work3.app.comment.exception.ProductCommentDoNotFoundException;
+import com.emrekara.work3.app.comment.exception.UserCommentDoNotFoundException;
 import com.emrekara.work3.app.gen.exceptions.GenBusinessException;
 import com.emrekara.work3.app.gen.exceptions.ItemNotFoundException;
 import com.emrekara.work3.app.user.exception.UserNotMatchException;
@@ -84,7 +85,20 @@ public class GenCustomizedResponseEntityExceptionHandler extends ResponseEntityE
     }
 
     @ExceptionHandler
-    public final ResponseEntity<Object> handleAllCommentDoNotFoundException(CommentDoNotFoundException ex, WebRequest webRequest){
+    public final ResponseEntity<Object> handleAllUserCommentDoNotFoundException(UserCommentDoNotFoundException ex, WebRequest webRequest){
+
+        Date errorDate = new Date();
+        String message = ex.getMessage();
+        String description = webRequest.getDescription(false);
+
+        GenExceptionResponse genExceptionResponse = new GenExceptionResponse(errorDate, message, description);
+        genExceptionResponse.setMessage(message);
+
+        return new ResponseEntity<>(genExceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAllProductCommentDoNotFoundException(ProductCommentDoNotFoundException ex, WebRequest webRequest){
 
         Date errorDate = new Date();
         String message = ex.getMessage();
