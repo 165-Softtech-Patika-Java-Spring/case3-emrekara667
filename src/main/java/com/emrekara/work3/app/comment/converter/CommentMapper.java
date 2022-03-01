@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CommentMapper {
 
@@ -15,4 +17,6 @@ public interface CommentMapper {
     Comment convertToComment(CommentSaveRequestDto commentSaveRequestDto);
 
     CommentDto convertToCommentDto(Comment comment);
+
+    List<CommentDto> convertToCommentDtoList(List<Comment> commentList);
 }

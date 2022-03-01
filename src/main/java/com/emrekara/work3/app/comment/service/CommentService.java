@@ -9,6 +9,8 @@ import com.emrekara.work3.app.user.service.entityservice.UserEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -27,5 +29,14 @@ public class CommentService {
     public void delete(Long id) {
         Comment comment = commentEntityService.getByIdWithControl(id);
         commentEntityService.delete(comment);
+    }
+
+    public List<CommentDto> findCommentByUser(Long userId) {
+
+        List<Comment> commentList = commentEntityService.findCommentByUser(userId);
+
+        List<CommentDto> commentDtoList = CommentMapper.INSTANCE.convertToCommentDtoList(commentList);
+
+        return commentDtoList;
     }
 }

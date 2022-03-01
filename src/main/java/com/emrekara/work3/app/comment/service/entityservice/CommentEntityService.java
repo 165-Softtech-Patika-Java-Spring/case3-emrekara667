@@ -7,10 +7,16 @@ import com.emrekara.work3.app.user.dao.UserDao;
 import com.emrekara.work3.app.user.entity.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommentEntityService extends BaseEntityService<Comment, CommentDao> {
 
     public CommentEntityService(CommentDao dao) {
         super(dao);
+    }
+
+    public List<Comment> findCommentByUser(Long userId) {
+        return getDao().findAllByUserId(userId);
     }
 }
